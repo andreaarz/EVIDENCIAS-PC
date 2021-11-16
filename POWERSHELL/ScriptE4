@@ -1,0 +1,7 @@
+#!/bin/bash
+
+(echo "Buen día, su sistema operativo en uso es:" 
+./osdetect 
+echo "DATOS DE SU RED LOCAL"
+./scripte4 ) > resultados.txt 
+exit

@@ -1,0 +1,25 @@
+#!/bin/bash
+function is_alive_ping() {
+	ping -c 1 $1 > /dev/null 2>&1
+	[ $? -eq 0 ] && echo "Node with IP: $i is up."
+}
+
+function portscan {
+		for ((counter=$firstport; counter<=$lastport; counter++)) 
+		do
+			(echo >/dev/tcp/$host/$counter) > /dev/null 2>&1 && echo "$counter open"
+		done
+}
+host=$red	
+firstport="10" 
+lastport="500" 
+
+read -p "Indique los primeros octetos de su red:" red 
+for i in $red.{1..255}
+do
+	is_alive_ping $i & disown
+	for i in $red.{1..255}
+	do
+		portscan
+	done
+done
